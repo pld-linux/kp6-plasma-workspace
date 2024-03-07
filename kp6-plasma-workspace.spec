@@ -4,24 +4,24 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.0.0
+%define		kdeplasmaver	6.0.1
 %define		qtver		5.15.2
 %define		kf6ver		5.102.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.0.0
+Version:	6.0.1
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	4a155013537b80009cc1e7d1582fda33
+# Source0-md5:	4cdf125ffda731702223f73bd172ba09
 Source1:	kde.pam
 Patch0:		kp6-plasma-workspace-absolute-path.patch
 Patch1:		kp6-plasma-workspace-scripts.patch
 URL:		http://www.kde.org/
-BuildRequires:	AppStream-qt-devel >= 0.10.6
+BuildRequires:	AppStream-qt6-devel >= 1.0
 BuildRequires:	Qt6Concurrent-devel >= %{qtver}
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6Network-devel >= %{qtver}
@@ -431,6 +431,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/libexec/plasma-dbus-run-session-if-needed
 %attr(755,root,root) %{_prefix}/libexec/plasma-sourceenv.sh
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-custom-position-of-panels
+%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_appstream.so
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
