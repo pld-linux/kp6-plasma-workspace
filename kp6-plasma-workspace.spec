@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.0.5
+%define		kdeplasmaver	6.1.0
 %define		qtver		5.15.2
 %define		kf6ver		5.102.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.0.5
+Version:	6.1.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	7697ef8eedbc90c06e160507775f9e3b
+# Source0-md5:	54971de19ecfc32cdce687d56378e29e
 Source1:	kde.pam
 Patch0:		kp6-plasma-workspace-absolute-path.patch
 Patch1:		kp6-plasma-workspace-scripts.patch
@@ -113,6 +113,7 @@ BuildRequires:	xorg-lib-libxkbcommon-devel
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	kp6-plasma-workspace-data = %{version}-%{release}
+Obsoletes:	kp5-%{kpname} < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		qt6dir		%{_libdir}/qt6
@@ -124,6 +125,7 @@ KDE Plasma Workspace.
 Summary:	Data files for %{kpname}
 Summary(pl.UTF-8):	Dane dla %{kpname}
 Group:		X11/Applications
+Obsoletes:	kp5-%{kpname}-data < %{version}
 BuildArch:	noarch
 
 %description data
@@ -137,6 +139,7 @@ Summary:	Header files for %{kpname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kpname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	kp5-%{kpname}-devel < %{version}
 
 %description devel
 Header files for %{kpname} development.
@@ -184,6 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/kde
 /etc/xdg/autostart/gmenudbusmenuproxy.desktop
 /etc/xdg/autostart/org.kde.plasmashell.desktop
+/etc/xdg/autostart/org.kde.plasma-fallback-session-restore.desktop
 /etc/xdg/autostart/xembedsniproxy.desktop
 /etc/xdg/menus/plasma-applications.menu
 /etc/xdg/plasmanotifyrc
@@ -307,7 +311,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_fonts.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_icons.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_lookandfeel.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_nightcolor.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_notifications.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_regionandlang.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_soundtheme.so
@@ -320,8 +323,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_apps.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_bbcukmet.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_clipboard.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_devicenotifications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_dict.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_dwd.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_envcan.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_executable.so
@@ -329,7 +330,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_filebrowser.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_geolocation.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_hotplug.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_keystate.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_mouse.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_noaa.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_notifications.so
@@ -337,14 +337,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_places.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_powermanagement.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_soliddevice.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_statusnotifieritem.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_time.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_weather.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_wettercom.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/geolocationprovider/plasma-geolocation-gps.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/geolocationprovider/plasma-geolocation-ip.so
 %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays/HolidaysConfig.qml
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasmacalendarplugins/holidaysevents.so
 %{_libdir}/qt6/qml/org/kde/breeze/components/ActionButton.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/Battery.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/Clock.qml
@@ -365,8 +363,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/colorcorrect/kde-qmlmodule.version
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/colorcorrect/libcolorcorrectplugin.so
 %{_libdir}/qt6/qml/org/kde/colorcorrect/qmldir
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/holidayeventshelperplugin/libholidayeventshelperplugin.so
-%{_libdir}/qt6/qml/org/kde/holidayeventshelperplugin/qmldir
 %{_libdir}/qt6/qml/org/kde/notificationmanager/kde-qmlmodule.version
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/notificationmanager/libnotificationmanagerplugin.so
 %{_libdir}/qt6/qml/org/kde/notificationmanager/notificationmanager.qmltypes
@@ -383,7 +379,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/ConfigOverlayWithHandles.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/PlaceHolder.qml
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/libcontainmentlayoutmanagerplugin.so
-%{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/private/BasicResizeHandle.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/qmldir
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/libdigitalclockplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/qmldir
@@ -404,7 +399,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/DayDelegate.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/DaysCalendar.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/InfiniteList.qml
-%{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/MonthMenu.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/MonthView.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/MonthViewHeader.qml
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/libcalendarplugin.so
@@ -433,6 +427,54 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/libexec/plasma-sourceenv.sh
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-custom-position-of-panels
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_appstream.so
+%ghost %{_libdir}/libbatterycontrol.so.6
+%attr(755,root,root) %{_libdir}/libbatterycontrol.so.*.*
+%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_nightlight.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/plasmacalendarplugins/holidaysevents.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/battery/batterycontrol.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/battery/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/battery/libbatterycontrolplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/battery/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/batterymonitorplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/libbatterymonitorplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/BasicResizeHandle.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/containmentlayoutmanagerplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/devicenotifierplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/libdevicenotifierplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/digitalclockplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/holidayevents.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/libholidayevents.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/keyboardindicatorplugin.qmltypes
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/libkeyboardindicatorplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/sessions/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/sessions/sessionsprivateplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/libsystemtrayplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/systemtrayplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/calendarplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/components/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/libworkspacecomponents.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/components/workspacecomponents.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/dbusplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/kde-qmlmodule.version
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/libdbusplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/trianglemousefilterplugin.qmltypes
+%attr(755,root,root) %{_prefix}/libexec/plasma-fallback-session-restore
+%attr(755,root,root) %{_prefix}/libexec/plasma-fallback-session-save
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
@@ -444,7 +486,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kcm_fonts.desktop
 %{_desktopdir}/kcm_icons.desktop
 %{_desktopdir}/kcm_lookandfeel.desktop
-%{_desktopdir}/kcm_nightcolor.desktop
 %{_desktopdir}/kcm_notifications.desktop
 %{_desktopdir}/kcm_regionandlang.desktop
 %{_desktopdir}/kcm_soundtheme.desktop
@@ -603,14 +644,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/avatars
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/defaults
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/layouts/org.kde.plasma.desktop-layout.js
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/LockOsd.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/LockScreen.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/LockScreenUi.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/MainBlock.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/MediaControls.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/NoPasswordUnlock.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/config.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/lockscreen/config.xml
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout/Logout.qml
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout/LogoutButton.qml
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout/timer.js
@@ -618,12 +651,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/osd/OsdItem.qml
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/fullscreenpreview.jpg
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/lockscreen.png
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/loginmanager.png
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/preview.png
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/runcommand.png
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/splash.png
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/userswitcher.png
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/windowdecoration.png
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/splash/Splash.qml
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/splash/images/busywidget.svgz
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/splash/images/kde.svgz
@@ -661,14 +690,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/PopupDialog.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/PowerManagementItem.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/PowerProfileItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/logic.js
 %{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.battery/metadata.json
 %{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/BrightnessItem.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/CompactRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/NightColorItem.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/PopupDialog.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/logic.js
 %{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/metadata.json
 %{_datadir}/plasma/plasmoids/org.kde.plasma.calendar/contents/config/config.qml
@@ -701,7 +727,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/config/main.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/CalendarView.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/DigitalClock.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/MonthMenu.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/Tooltip.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/configAppearance.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/configCalendar.qml
@@ -819,7 +844,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma5support/services/applicationjobs.operations
 %{_datadir}/plasma5support/services/apps.operations
 %{_datadir}/plasma5support/services/hotplug.operations
-%{_datadir}/plasma5support/services/modifierkeystate.operations
 %{_datadir}/plasma5support/services/notifications.operations
 %{_datadir}/plasma5support/services/org.kde.places.operations
 %{_datadir}/plasma5support/services/org.kde.plasma.clipboard.operations
@@ -835,22 +859,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qlogging-categories6/libnotificationmanager.categories
 %{_datadir}/qlogging-categories6/myproject.categories
 %{_datadir}/qlogging-categories6/plasma-workspace.categories
-%{_datadir}/sddm/themes/breeze/Background.qml
-%{_datadir}/sddm/themes/breeze/KeyboardButton.qml
-%{_datadir}/sddm/themes/breeze/Login.qml
-%{_datadir}/sddm/themes/breeze/Main.qml
-%{_datadir}/sddm/themes/breeze/SessionButton.qml
-%{_datadir}/sddm/themes/breeze/default-logo.svg
-%{_datadir}/sddm/themes/breeze/faces/.face.icon
-%{_datadir}/sddm/themes/breeze/metadata.desktop
-%{_datadir}/sddm/themes/breeze/preview.png
-%{_datadir}/sddm/themes/breeze/theme.conf
 %{_datadir}/solid/actions/openWithFileManager.desktop
 %{_datadir}/wayland-sessions/plasma.desktop
 %{_datadir}/xsessions/plasmax11.desktop
 %{zsh_compdir}/_krunner
 %{zsh_compdir}/_plasmashell
 %{_datadir}/kconf_update/plasmashell-6.0-keep-custom-position-of-panels.upd
+%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/KeyboardColorItem.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/NightLightItem.qml
+%{_datadir}/plasma/weather/noaa_station_list.xml
+%{_datadir}/qlogging-categories6/batterycontrol.categories
+%{_datadir}/qlogging-categories6/batterymonitor.categories
+%{_desktopdir}/kcm_nightlight.desktop
+%{_desktopdir}/org.kde.kfontinst.desktop
+%{_desktopdir}/org.kde.plasma-fallback-session-save.desktop
 
 %files devel
 %defattr(644,root,root,755)
@@ -877,3 +899,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkrdb.so
 %{_libdir}/libkmpris.so
 %{_libdir}/libkworkspace6.so
+%{_libdir}/libbatterycontrol.so
