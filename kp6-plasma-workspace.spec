@@ -18,8 +18,6 @@ Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
 # Source0-md5:	575c902a134bb24214f76c500460df39
 Source1:	kde.pam
-Patch0:		kp6-plasma-workspace-absolute-path.patch
-Patch1:		kp6-plasma-workspace-scripts.patch
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
 BuildRequires:	Qt6Concurrent-devel >= %{qtver}
@@ -149,8 +147,6 @@ Pliki nagłówkowe dla programistów używających %{kpname}.
 
 %prep
 %setup -q -n %{kpname}-%{version}
-#%%patch0 -p1
-#%%patch1 -p1
 
 %build
 %cmake -B build \
