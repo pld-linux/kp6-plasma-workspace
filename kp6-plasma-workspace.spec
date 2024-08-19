@@ -37,7 +37,7 @@ BuildRequires:	gpsd-devel
 BuildRequires:	iso-codes
 BuildRequires:	ka6-kio-extras-devel
 BuildRequires:	ka6-libkexiv2-devel
-BuildRequires:	kf5-plasma-wayland-protocols-devel >= 1.6
+BuildRequires:	plasma-wayland-protocols-devel >= 1.6
 BuildRequires:	kf6-baloo-devel
 BuildRequires:	kf6-extra-cmake-modules >= %{kf6ver}
 BuildRequires:	kf6-karchive-devel >= %{kf6ver}
