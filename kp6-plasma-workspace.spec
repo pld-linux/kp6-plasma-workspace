@@ -24,6 +24,7 @@ BuildRequires:	Qt6Concurrent-devel >= %{qtver}
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6Network-devel >= %{qtver}
 BuildRequires:	Qt6PrintSupport-devel >= %{qtver}
+BuildRequires:	Qt6Qt5Compat-devel >= %{qtver}
 BuildRequires:	Qt6Quick-devel >= %{qtver}
 BuildRequires:	Qt6ShaderTools-devel >= %{qtver}
 BuildRequires:	Qt6Sql-devel >= %{qtver}
