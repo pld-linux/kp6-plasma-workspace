@@ -65,6 +65,7 @@ BuildRequires:	kf6-kpackage-devel >= %{kf6ver}
 BuildRequires:	kf6-kpeople-devel >= %{kf6ver}
 BuildRequires:	kf6-kquickcharts-devel >= %{kf6ver}
 BuildRequires:	kf6-krunner-devel >= %{kf6ver}
+BuildRequires:	kf6-kstatusnotifieritem-devel >= %{kf6ver}
 BuildRequires:	kf6-ksvg-devel >= %{kf6ver}
 BuildRequires:	kf6-ktexteditor-devel >= %{kf6ver}
 BuildRequires:	kf6-ktextwidgets-devel >= %{kf6ver}
