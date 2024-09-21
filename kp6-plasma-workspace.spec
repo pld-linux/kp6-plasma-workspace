@@ -4,9 +4,9 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.1.5
-%define		qtver		5.15.2
-%define		kf6ver		5.102.0
+%define		kdeplasmaver	6.1.0
+%define		qtver		6.6.0
+%define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
@@ -98,6 +98,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	plasma-wayland-protocols-devel >= 1.6
 BuildRequires:	polkit-qt6-1-devel
 BuildRequires:	qcoro-qt6-devel
+BuildRequires:	qt6-shadertools
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
