@@ -75,15 +75,16 @@ BuildRequires:	kf6-networkmanager-qt-devel >= %{kf6ver}
 BuildRequires:	kf6-prison-devel >= %{kf6ver}
 BuildRequires:	kp6-breeze-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-kpipewire-devel >= %{kdeplasmaver}
-BuildRequires:	kp6-kscreenlocker-devel >= 5.13.80
-BuildRequires:	kp6-kwayland-devel >= 5.93.0
+BuildRequires:	kp6-kscreenlocker-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-kwayland-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-kwin-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-layer-shell-qt-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libkscreen-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libksysguard-devel >= %{kdeplasmaver}
-BuildRequires:	kp6-plasma-activities-devel >= 5.93.0
-BuildRequires:	kp6-plasma-activities-stats-devel >= 5.93.0
-BuildRequires:	kp6-plasma5support-devel >= 5.93.0
+BuildRequires:	kp6-libplasma-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-plasma-activities-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-plasma-activities-stats-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-plasma5support-devel >= %{kdeplasmaver}
 BuildRequires:	kuserfeedback-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	libicu-devel
