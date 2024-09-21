@@ -95,6 +95,7 @@ BuildRequires:	pipewire-devel >= 0.3
 BuildRequires:	pkgconfig
 BuildRequires:	plasma-wayland-protocols-devel >= 1.6
 BuildRequires:	polkit-qt6-1-devel
+BuildRequires:	qcoro-qt6-devel
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
