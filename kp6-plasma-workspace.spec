@@ -37,7 +37,6 @@ BuildRequires:	gpsd-devel
 BuildRequires:	iso-codes
 BuildRequires:	ka6-kio-extras-devel
 BuildRequires:	ka6-libkexiv2-devel
-BuildRequires:	plasma-wayland-protocols-devel >= 1.6
 BuildRequires:	kf6-baloo-devel
 BuildRequires:	kf6-extra-cmake-modules >= %{kf6ver}
 BuildRequires:	kf6-karchive-devel >= %{kf6ver}
@@ -51,7 +50,7 @@ BuildRequires:	kf6-kded-devel
 BuildRequires:	kf6-kdoctools-devel >= %{kf6ver}
 BuildRequires:	kf6-kglobalaccel-devel >= %{kf6ver}
 BuildRequires:	kf6-kguiaddons-devel >= %{kf6ver}
-BuildRequires:	kf6-kholidays-devel
+BuildRequires:	kf6-kholidays-devel >= %{kf6ver}
 BuildRequires:	kf6-ki18n-devel >= %{kf6ver}
 BuildRequires:	kf6-kiconthemes-devel >= %{kf6ver}
 BuildRequires:	kf6-kidletime-devel >= %{kf6ver}
@@ -65,6 +64,7 @@ BuildRequires:	kf6-kpackage-devel >= %{kf6ver}
 BuildRequires:	kf6-kpeople-devel >= %{kf6ver}
 BuildRequires:	kf6-kquickcharts-devel >= %{kf6ver}
 BuildRequires:	kf6-krunner-devel >= %{kf6ver}
+BuildRequires:	kf6-ksvg-devel >= %{kf6ver}
 BuildRequires:	kf6-ktexteditor-devel >= %{kf6ver}
 BuildRequires:	kf6-ktextwidgets-devel >= %{kf6ver}
 BuildRequires:	kf6-kunitconversion-devel >= %{kf6ver}
@@ -92,6 +92,7 @@ BuildRequires:	ninja
 BuildRequires:	phonon-qt6-devel >= 4.6.60
 BuildRequires:	pipewire-devel >= 0.3
 BuildRequires:	pkgconfig
+BuildRequires:	plasma-wayland-protocols-devel >= 1.6
 BuildRequires:	polkit-qt6-1-devel
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
