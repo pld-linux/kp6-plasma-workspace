@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.1.0
+%define		kdeplasmaver	6.2.0
 %define		qtver		6.6.0
 %define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.1.5
-Release:	2
+Version:	6.2.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	ff0c55c80a512fa8ffecfd97d6a21267
+# Source0-md5:	daa795f447bcd8ac4b2480f7f28f827a
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -277,7 +277,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_bookmarksrunner.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_kill.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_placesrunner.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_powerdevil.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_recentdocuments.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_services.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_sessions.so
@@ -331,14 +330,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_favicons.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_filebrowser.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_geolocation.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_hotplug.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_mouse.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_noaa.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_notifications.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_packagekit.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_places.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_powermanagement.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_soliddevice.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_time.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_weather.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_wettercom.so
@@ -373,10 +370,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/lookandfeel/qmldir
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/libappmenuplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/qmldir
-%{_libdir}/qt6/qml/org/kde/plasma/private/brightnesscontrolplugin/brightnesscontrolplugin.qmltypes
-%{_libdir}/qt6/qml/org/kde/plasma/private/brightnesscontrolplugin/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/brightnesscontrolplugin/libbrightnesscontrolplugin.so
-%{_libdir}/qt6/qml/org/kde/plasma/private/brightnesscontrolplugin/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/BasicAppletContainer.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/ConfigOverlayWithHandles.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/PlaceHolder.qml
@@ -437,10 +430,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/private/battery/kde-qmlmodule.version
 %attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/battery/libbatterycontrolplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/battery/qmldir
-%{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/batterymonitorplugin.qmltypes
-%{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/libbatterymonitorplugin.so
-%{_libdir}/qt6/qml/org/kde/plasma/private/batterymonitor/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/BasicResizeHandle.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/containmentlayoutmanagerplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/kde-qmlmodule.version
@@ -477,6 +466,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/trianglemousefilterplugin.qmltypes
 %attr(755,root,root) %{_prefix}/libexec/plasma-fallback-session-restore
 %attr(755,root,root) %{_prefix}/libexec/plasma-fallback-session-save
+%ghost %{_libdir}/libklipper.so.6
+%attr(755,root,root) %{_libdir}/libklipper.so.*.*
+%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/donationmessage.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/BarcodePage.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/ClipboardItemDelegate.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/ClipboardMenu.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/DelegateToolButtons.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/EditPage.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/ImageItemDelegate.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/KlipperPopup.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/TextItemDelegate.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/UrlItemDelegate.qml
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/klipperplugin.qmltypes
+%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/libklipperplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/shell/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/shell/plasmashellprivateplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/taskmanager/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/taskmanager/taskmanager.qmltypes
+
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
@@ -623,8 +633,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.plasma.activitybar.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.analogclock.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.appmenu.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.battery.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.brightness.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.calendar.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.cameraindicator.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.clipboard.appdata.xml
@@ -685,20 +693,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/plasmoids/org.kde.plasma.appmenu/contents/ui/configGeneral.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.appmenu/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.appmenu/metadata.json
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/config/main.xml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/BatteryItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/CompactRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/InhibitionHint.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/PopupDialog.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/PowerManagementItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/PowerProfileItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery/metadata.json
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/BrightnessItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/CompactRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/PopupDialog.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/metadata.json
 %{_datadir}/plasma/plasmoids/org.kde.plasma.calendar/contents/config/config.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.calendar/contents/config/main.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.calendar/contents/images/mini-calendar.svgz
@@ -709,16 +703,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/plasmoids/org.kde.plasma.cameraindicator/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.cameraindicator/metadata.json
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/config/main.xml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/BarcodePage.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/ClipboardItemDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/ClipboardPage.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/DelegateToolButtons.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/EditPage.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/ImageItemDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/Menu.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/TextItemDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/UrlItemDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/metadata.json
 %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/config/main.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/DeviceItem.qml
@@ -845,13 +829,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma5support/services/activities.operations
 %{_datadir}/plasma5support/services/applicationjobs.operations
 %{_datadir}/plasma5support/services/apps.operations
-%{_datadir}/plasma5support/services/hotplug.operations
 %{_datadir}/plasma5support/services/notifications.operations
 %{_datadir}/plasma5support/services/org.kde.places.operations
 %{_datadir}/plasma5support/services/org.kde.plasma.clipboard.operations
 %{_datadir}/plasma5support/services/packagekit.operations
 %{_datadir}/plasma5support/services/powermanagementservice.operations
-%{_datadir}/plasma5support/services/soliddevice.operations
 %{_datadir}/plasma5support/services/statusnotifieritem.operations
 %{_datadir}/polkit-1/actions/org.kde.fontinst.policy
 %{_datadir}/polkit-1/actions/org.kde.localegenhelper.policy
@@ -859,7 +841,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qlogging-categories6/kcmusers.categories
 %{_datadir}/qlogging-categories6/klipper.categories
 %{_datadir}/qlogging-categories6/libnotificationmanager.categories
-%{_datadir}/qlogging-categories6/myproject.categories
 %{_datadir}/qlogging-categories6/plasma-workspace.categories
 %{_datadir}/solid/actions/openWithFileManager.desktop
 %{_datadir}/wayland-sessions/plasma.desktop
@@ -867,14 +848,16 @@ rm -rf $RPM_BUILD_ROOT
 %{zsh_compdir}/_krunner
 %{zsh_compdir}/_plasmashell
 %{_datadir}/kconf_update/plasmashell-6.0-keep-custom-position-of-panels.upd
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/KeyboardColorItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness/contents/ui/NightLightItem.qml
 %{_datadir}/plasma/weather/noaa_station_list.xml
 %{_datadir}/qlogging-categories6/batterycontrol.categories
-%{_datadir}/qlogging-categories6/batterymonitor.categories
 %{_desktopdir}/kcm_nightlight.desktop
 %{_desktopdir}/org.kde.kfontinst.desktop
 %{_desktopdir}/org.kde.plasma-fallback-session-save.desktop
+%{_datadir}/metainfo/org.kde.plasma.panelspacer.appdata.xml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/main.qml
+%{_datadir}/qlogging-categories6/devicenotifier.categories
+%{_datadir}/xdg-desktop-portal/kde-portals.conf
+%{_datadir}/knotifications6/donationmessage.notifyrc
 
 %files devel
 %defattr(644,root,root,755)
@@ -902,3 +885,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkmpris.so
 %{_libdir}/libkworkspace6.so
 %{_libdir}/libbatterycontrol.so
+%{_libdir}/libklipper.so
