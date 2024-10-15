@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.2.0
+%define		kdeplasmaver	6.2.1
 %define		qtver		6.6.0
 %define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.2.0
+Version:	6.2.1
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	daa795f447bcd8ac4b2480f7f28f827a
+# Source0-md5:	547a999783ab43b44c65418a43eeedcc
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -938,7 +938,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/metadata.json
 %dir %{_datadir}/plasma/wallpapers/org.kde.color
@@ -1018,6 +1017,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qlogging-categories6/devicenotifier.categories
 %{_datadir}/xdg-desktop-portal/kde-portals.conf
 %{_datadir}/knotifications6/donationmessage.notifyrc
+%{_desktopdir}/org.kde.klipper.desktop
 
 %files devel
 %defattr(644,root,root,755)
