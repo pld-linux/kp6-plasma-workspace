@@ -12,7 +12,7 @@
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
 Version:	6.2.1
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -174,7 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 install -p -D %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/kde
 
 # unsupported locale
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/tok
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ie,tok}
 sed -i -e 's|/usr/bin/env python3|%{_bindir}/python3|' $RPM_BUILD_ROOT%{_datadir}/kconf_update/migrate-calendar-to-plugin-id.py
 
 %find_lang %{kpname} --all-name --with-kde
@@ -272,8 +272,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/applications.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/desktop.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/kio_fonts.so
+%dir %{_libdir}/qt6/plugins/kf6/krunner
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/calculator.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/helprunner.so
+%dir %{_libdir}/qt6/plugins/kf6/krunner/kcms
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/kcms/kcm_krunner_kill.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_bookmarksrunner.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_kill.so
