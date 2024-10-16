@@ -12,7 +12,7 @@
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
 Version:	6.2.1
-Release:	3
+Release:	4
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -347,6 +347,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/qt6/plugins/plasma5support/geolocationprovider
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/geolocationprovider/plasma-geolocation-gps.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/geolocationprovider/plasma-geolocation-ip.so
+%dir %{_libdir}/qt6/plugins/plasmacalendarplugins
 %dir %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays
 %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays/HolidaysConfig.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/ActionButton.qml
