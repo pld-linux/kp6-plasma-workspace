@@ -4,22 +4,23 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.2.5
+%define		kdeplasmaver	6.3.0
 %define		qtver		6.6.0
 %define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.2.5
-Release:	2
+Version:	6.3.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	409024a0c0ea7b02369dd562b5924001
+# Source0-md5:	43eedae7b78e7286a8ac7af5b91ed910
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
+BuildRequires:	PackageKit-qt6-devel
 BuildRequires:	Qt6Concurrent-devel >= %{qtver}
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6Network-devel >= %{qtver}
@@ -251,8 +252,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkworkspace6.so.*.*
 %ghost %{_libdir}/libnotificationmanager.so.1
 %attr(755,root,root) %{_libdir}/libnotificationmanager.so.*.*
-%ghost %{_libdir}/libplasma-geolocation-interface.so.6
-%attr(755,root,root) %{_libdir}/libplasma-geolocation-interface.so.*.*
 %attr(755,root,root) %{_libdir}/libtaskmanager.so.*.*
 %ghost %{_libdir}/libtaskmanager.so.6
 %ghost %{_libdir}/libweather_ion.so.7
@@ -324,29 +323,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_users.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_wallpaper.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings_qwidgets/kcm_fontinst.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_activities.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_applicationjobs.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_apps.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_bbcukmet.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_clipboard.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_dwd.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_envcan.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_executable.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_favicons.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_filebrowser.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_geolocation.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_mouse.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_noaa.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_notifications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_packagekit.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_places.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_powermanagement.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_time.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_weather.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_wettercom.so
-%dir %{_libdir}/qt6/plugins/plasma5support/geolocationprovider
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/geolocationprovider/plasma-geolocation-gps.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/geolocationprovider/plasma-geolocation-ip.so
 %dir %{_libdir}/qt6/plugins/plasmacalendarplugins
 %dir %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays
 %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays/HolidaysConfig.qml
@@ -523,7 +510,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/private/shell/plasmashellprivateplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/taskmanager/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/taskmanager/taskmanager.qmltypes
-
+%attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.3-update-clipboard-database-2-to-3
+%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/geotimezoned.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/oom-notifier.so
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
@@ -847,17 +836,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui
 %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/CompactRepresentation.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/DraggableDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/DraggableFileArea.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/EditContextMenu.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/FullRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/JobDetails.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/JobItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/NotificationHeader.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/NotificationItem.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/NotificationPopup.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/NotificationReplyField.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/SelectableLabel.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/ThumbnailStrip.qml
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global
 %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/Globals.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/PulseAudio.qml
@@ -987,14 +967,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/BlurComponent.qml
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/StaticImageComponent.qml
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/metadata.json
-%{_datadir}/plasma5support/services/activities.operations
 %{_datadir}/plasma5support/services/applicationjobs.operations
-%{_datadir}/plasma5support/services/apps.operations
 %{_datadir}/plasma5support/services/notifications.operations
-%{_datadir}/plasma5support/services/org.kde.places.operations
 %{_datadir}/plasma5support/services/org.kde.plasma.clipboard.operations
-%{_datadir}/plasma5support/services/packagekit.operations
-%{_datadir}/plasma5support/services/powermanagementservice.operations
 %{_datadir}/plasma5support/services/statusnotifieritem.operations
 %{_datadir}/polkit-1/actions/org.kde.fontinst.policy
 %{_datadir}/polkit-1/actions/org.kde.localegenhelper.policy
@@ -1022,19 +997,43 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xdg-desktop-portal/kde-portals.conf
 %{_datadir}/knotifications6/donationmessage.notifyrc
 %{_desktopdir}/org.kde.klipper.desktop
+%{_datadir}/desktop-directories/kf5-help.directory
+%{_datadir}/kconf_update/plasma6.3-update-clipboard-database-2-to-3.upd
+%{_datadir}/knotifications6/libnotificationmanager.notifyrc
+%{_datadir}/knotifications6/oom-notifier.notifyrc
+%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/NoTimezoneWarning.qml
+%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/ActionContainer.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/Body.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/DraggableFileArea.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/EditContextMenu.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/FooterLoader.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/HeadingButtons.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/Icon.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/JobDetails.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/JobIconItem.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/JobItem.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/ModelInterface.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/NotificationHeader.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/NotificationReplyField.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/Summary.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/ThumbnailStrip.qml
+%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/BaseDelegate.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/DelegateHistory.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/DelegateHistoryGrouped.qml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/DelegatePopup.qml
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/krdb
 %{_includedir}/kworkspace6
 %{_includedir}/plasma5support
-%{_includedir}/plasma
 %{_includedir}/taskmanager
 %{_libdir}/cmake/KRunnerAppDBusInterface
 %{_libdir}/cmake/KSMServerDBusInterface
 %{_libdir}/cmake/LibKWorkspace
 %{_libdir}/cmake/LibTaskManager
-%{_libdir}/libplasma-geolocation-interface.so
 %{_libdir}/libtaskmanager.so
 %{_libdir}/libweather_ion.so
 %{_includedir}/colorcorrect
@@ -1046,7 +1045,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkfontinstui.so
 %{_libdir}/libnotificationmanager.so
 %{_libdir}/libkrdb.so
-%{_libdir}/libkmpris.so
 %{_libdir}/libkworkspace6.so
 %{_libdir}/libbatterycontrol.so
 %{_libdir}/libklipper.so
