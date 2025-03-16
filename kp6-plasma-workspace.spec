@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.3.2
+%define		kdeplasmaver	6.3.3
 %define		qtver		6.6.0
 %define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.3.2
-Release:	2
+Version:	6.3.3
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	b83418536dead5549a9c87eaf7b1fe4d
+# Source0-md5:	d7518a609154b2fa32533eabb5416870
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -72,6 +72,7 @@ BuildRequires:	kf6-ksvg-devel >= %{kf6ver}
 BuildRequires:	kf6-ktexteditor-devel >= %{kf6ver}
 BuildRequires:	kf6-ktextwidgets-devel >= %{kf6ver}
 BuildRequires:	kf6-kunitconversion-devel >= %{kf6ver}
+BuildRequires:	kf6-kuserfeedback-devel >= %{kf6ver}
 BuildRequires:	kf6-kwallet-devel >= %{kf6ver}
 BuildRequires:	kf6-networkmanager-qt-devel >= %{kf6ver}
 BuildRequires:	kf6-prison-devel >= %{kf6ver}
@@ -313,6 +314,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_colors.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_cursortheme.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_desktoptheme.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_feedback.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_fonts.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_icons.so
 %attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_lookandfeel.so
@@ -520,6 +522,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/kcm_colors.desktop
 %{_desktopdir}/kcm_cursortheme.desktop
 %{_desktopdir}/kcm_desktoptheme.desktop
+%{_desktopdir}/kcm_feedback.desktop
 %{_desktopdir}/kcm_fontinst.desktop
 %{_desktopdir}/kcm_fonts.desktop
 %{_desktopdir}/kcm_icons.desktop
@@ -536,6 +539,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/org.kde.plasmawindowed.desktop
 %{_datadir}/config.kcfg/colorssettings.kcfg
 %{_datadir}/config.kcfg/cursorthemesettings.kcfg
+%{_datadir}/config.kcfg/feedbacksettings.kcfg
 %{_datadir}/config.kcfg/fontssettings.kcfg
 %{_datadir}/config.kcfg/freespacenotifier.kcfg
 %{_datadir}/config.kcfg/iconssettingsbase.kcfg
