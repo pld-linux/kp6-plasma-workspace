@@ -12,7 +12,7 @@
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
 Version:	6.4.2
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -23,6 +23,7 @@ BuildRequires:	AppStream-qt6-devel >= 1.0
 BuildRequires:	PackageKit-qt6-devel
 BuildRequires:	Qt6Concurrent-devel >= %{qtver}
 BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt6Location-devel >= %{qtver}
 BuildRequires:	Qt6Network-devel >= %{qtver}
 BuildRequires:	Qt6Positioning-devel >= %{qtver}
 BuildRequires:	Qt6PrintSupport-devel >= %{qtver}
