@@ -12,7 +12,7 @@
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
 Version:	6.4.5
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -59,6 +59,7 @@ BuildRequires:	kf6-ki18n-devel >= %{kf6ver}
 BuildRequires:	kf6-kiconthemes-devel >= %{kf6ver}
 BuildRequires:	kf6-kidletime-devel >= %{kf6ver}
 BuildRequires:	kf6-kio-devel >= %{kf6ver}
+BuildRequires:	kf6-kirigami-addons-devel
 BuildRequires:	kf6-kirigami-devel >= %{kf6ver}
 BuildRequires:	kf6-kitemmodels-devel >= %{kf6ver}
 BuildRequires:	kf6-knewstuff-devel >= %{kf6ver}
@@ -108,6 +109,7 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	wayland-devel
 BuildRequires:	wayland-protocols >= 1.31
+BuildRequires:	xcb-util-cursor-devel
 BuildRequires:	xorg-lib-libICE-devel
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
