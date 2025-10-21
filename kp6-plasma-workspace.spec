@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.4.5
+%define		kdeplasmaver	6.5.0
 %define		qtver		6.6.0
 %define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.4.5
-Release:	3
+Version:	6.5.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	74b6c139d38bc6575618f1b75e7dece2
+# Source0-md5:	07c4d20db2ef1399804741c8d0a4d1f2
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -39,7 +39,7 @@ BuildRequires:	cmake >= 3.22
 BuildRequires:	fontconfig-devel
 BuildRequires:	gpsd-devel
 BuildRequires:	iso-codes
-BuildRequires:	ka6-kio-extras-devel
+BuildRequires:	ka6-kio-extras-devel >= 25.08.2-3
 BuildRequires:	ka6-libkexiv2-devel
 BuildRequires:	kf6-baloo-devel
 BuildRequires:	kf6-extra-cmake-modules >= %{kf6ver}
@@ -241,7 +241,6 @@ rm -rf $RPM_BUILD_ROOT
 %{systemduserunitdir}/plasma-kcminit.service
 %{systemduserunitdir}/plasma-krunner.service
 %{systemduserunitdir}/plasma-ksmserver.service
-%{systemduserunitdir}/plasma-ksplash-ready.service
 %{systemduserunitdir}/plasma-ksplash.service
 %{systemduserunitdir}/plasma-plasmashell.service
 %{systemduserunitdir}/plasma-restoresession.service
@@ -252,100 +251,97 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.0-remove-dpi-settings
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
-%ghost %{_libdir}/libcolorcorrect.so.6
-%attr(755,root,root) %{_libdir}/libcolorcorrect.so.*.*
+%attr(755,root,root) %{_libdir}/kconf_update_bin/plasmashell-6.5-remove-stop-activity-shortcut
 %ghost %{_libdir}/libkfontinst.so.6
-%attr(755,root,root) %{_libdir}/libkfontinst.so.*.*
+%{_libdir}/libkfontinst.so.*.*
 %ghost %{_libdir}/libkfontinstui.so.6
-%attr(755,root,root) %{_libdir}/libkfontinstui.so.*.*
+%{_libdir}/libkfontinstui.so.*.*
+%ghost %{_libdir}/libklookandfeel.so.6
+%{_libdir}/libklookandfeel.so.*.*
 %ghost %{_libdir}/libkmpris.so.6
-%attr(755,root,root) %{_libdir}/libkmpris.so.*.*
+%{_libdir}/libkmpris.so.*.*
 %ghost %{_libdir}/libkworkspace6.so.6
-%attr(755,root,root) %{_libdir}/libkworkspace6.so.*.*
+%{_libdir}/libkworkspace6.so.*.*
 %ghost %{_libdir}/libnotificationmanager.so.1
-%attr(755,root,root) %{_libdir}/libnotificationmanager.so.*.*
-%attr(755,root,root) %{_libdir}/libtaskmanager.so.*.*
+%{_libdir}/libnotificationmanager.so.*.*
+%{_libdir}/libtaskmanager.so.*.*
 %ghost %{_libdir}/libtaskmanager.so.6
-%ghost %{_libdir}/libweather_ion.so.7
-%attr(755,root,root) %{_libdir}/libweather_ion.so.*.*
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/appmenu.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/colorcorrectlocationupdater.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/desktopnotifier.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/devicenotifications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/freespacenotifier.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/ktimezoned.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/mprisservice.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/plasma-session-shortcuts.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/plasma_accentcolor_service.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/soliduiserver.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/statusnotifierwatcher.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kfileitemaction/wallpaperfileitemaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/applications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/desktop.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/kio_fonts.so
+%{_libdir}/qt6/plugins/kf6/kded/appmenu.so
+%{_libdir}/qt6/plugins/kf6/kded/desktopnotifier.so
+%{_libdir}/qt6/plugins/kf6/kded/devicenotifications.so
+%{_libdir}/qt6/plugins/kf6/kded/freespacenotifier.so
+%{_libdir}/qt6/plugins/kf6/kded/ktimezoned.so
+%{_libdir}/qt6/plugins/kf6/kded/lookandfeelautoswitcher.so
+%{_libdir}/qt6/plugins/kf6/kded/mprisservice.so
+%{_libdir}/qt6/plugins/kf6/kded/plasma-session-shortcuts.so
+%{_libdir}/qt6/plugins/kf6/kded/plasma_accentcolor_service.so
+%{_libdir}/qt6/plugins/kf6/kded/soliduiserver.so
+%{_libdir}/qt6/plugins/kf6/kded/statusnotifierwatcher.so
+%{_libdir}/qt6/plugins/kf6/kfileitemaction/wallpaperfileitemaction.so
+%{_libdir}/qt6/plugins/kf6/kio/applications.so
+%{_libdir}/qt6/plugins/kf6/kio/desktop.so
+%{_libdir}/qt6/plugins/kf6/kio/kio_fonts.so
 %dir %{_libdir}/qt6/plugins/kf6/krunner
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/calculator.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/helprunner.so
+%{_libdir}/qt6/plugins/kf6/krunner/calculator.so
+%{_libdir}/qt6/plugins/kf6/krunner/helprunner.so
 %dir %{_libdir}/qt6/plugins/kf6/krunner/kcms
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/kcms/kcm_krunner_kill.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_bookmarksrunner.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_kill.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_placesrunner.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_recentdocuments.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_services.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_sessions.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_shell.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_webshortcuts.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/locations.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/packagestructure/plasma_layouttemplate.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/packagestructure/plasma_lookandfeel.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/packagestructure/wallpaper_images.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/parts/kfontviewpart.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/thumbcreator/fontthumbnail.so
+%{_libdir}/qt6/plugins/kf6/krunner/kcms/kcm_krunner_kill.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_bookmarksrunner.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_kill.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_placesrunner.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_recentdocuments.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_services.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_sessions.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_shell.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_webshortcuts.so
+%{_libdir}/qt6/plugins/kf6/krunner/locations.so
+%{_libdir}/qt6/plugins/kf6/packagestructure/plasma_layouttemplate.so
+%{_libdir}/qt6/plugins/kf6/packagestructure/plasma_lookandfeel.so
+%{_libdir}/qt6/plugins/kf6/packagestructure/wallpaper_images.so
+%{_libdir}/qt6/plugins/kf6/parts/kfontviewpart.so
+%{_libdir}/qt6/plugins/kf6/thumbcreator/fontthumbnail.so
 %dir %{_libdir}/qt6/plugins/phonon_platform
-%attr(755,root,root) %{_libdir}/qt6/plugins/phonon_platform/kde.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.appmenu.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.calendar.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.icon.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.notifications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.panelspacer.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.systemmonitor.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.systemtray.so
+%{_libdir}/qt6/plugins/phonon_platform/kde.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.appmenu.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.calendar.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.devicenotifier.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.digitalclock.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.icon.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.lock_logout.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.notifications.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.panelspacer.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.systemmonitor.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.systemtray.so
 %dir %{_libdir}/qt6/plugins/plasma/containmentactions
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.applauncher.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.contextmenu.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.paste.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.switchdesktop.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/containmentactions/switchactivity.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/containmentactions/switchwindow.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcminit/kcm_fonts_init.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcminit/kcm_style_init.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_autostart.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_colors.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_cursortheme.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_desktoptheme.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_feedback.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_fonts.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_icons.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_lookandfeel.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_notifications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_regionandlang.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_soundtheme.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_style.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_users.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_wallpaper.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings_qwidgets/kcm_fontinst.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_applicationjobs.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_bbcukmet.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_clipboard.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_dwd.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_envcan.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_executable.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_noaa.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_notifications.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_time.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_weather.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_wettercom.so
+%{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.applauncher.so
+%{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.contextmenu.so
+%{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.paste.so
+%{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.switchdesktop.so
+%{_libdir}/qt6/plugins/plasma/containmentactions/switchactivity.so
+%{_libdir}/qt6/plugins/plasma/containmentactions/switchwindow.so
+%{_libdir}/qt6/plugins/plasma/kcminit/kcm_fonts_init.so
+%{_libdir}/qt6/plugins/plasma/kcminit/kcm_style_init.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_autostart.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_colors.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_cursortheme.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_desktoptheme.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_feedback.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_fonts.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_icons.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_lookandfeel.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_nighttime.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_notifications.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_regionandlang.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_soundtheme.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_style.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_users.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_wallpaper.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings_qwidgets/kcm_fontinst.so
+%{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_applicationjobs.so
+%{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_clipboard.so
+%{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_executable.so
+%{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_notifications.so
+%{_libdir}/qt6/plugins/plasma5support/dataengine/plasma_engine_time.so
 %dir %{_libdir}/qt6/plugins/plasmacalendarplugins
 %dir %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays
 %{_libdir}/qt6/plugins/plasmacalendarplugins/holidays/HolidaysConfig.qml
@@ -364,50 +360,49 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/breeze/components/components.qmltypes
 %{_libdir}/qt6/qml/org/kde/breeze/components/kde-qmlmodule.version
 %dir %{_libdir}/qt6/qml/org/kde/breeze/components
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/breeze/components/libcomponents.so
+%{_libdir}/qt6/qml/org/kde/breeze/components/libcomponents.so
 %{_libdir}/qt6/qml/org/kde/breeze/components/qmldir
-%dir %{_libdir}/qt6/qml/org/kde/colorcorrect
-%{_libdir}/qt6/qml/org/kde/colorcorrect/colorcorrect.qmltypes
-%{_libdir}/qt6/qml/org/kde/colorcorrect/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/colorcorrect/libcolorcorrectplugin.so
-%{_libdir}/qt6/qml/org/kde/colorcorrect/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/notificationmanager
 %{_libdir}/qt6/qml/org/kde/notificationmanager/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/notificationmanager/libnotificationmanagerplugin.so
+%{_libdir}/qt6/qml/org/kde/notificationmanager/libnotificationmanagerplugin.so
 %{_libdir}/qt6/qml/org/kde/notificationmanager/notificationmanager.qmltypes
 %{_libdir}/qt6/qml/org/kde/notificationmanager/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/lookandfeel
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/lookandfeel/liblookandfeelqmlplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/lookandfeel/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/lookandfeel/liblookandfeelqmlplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/lookandfeel/lookandfeelqmlplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/lookandfeel/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/libappmenuplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/libappmenuplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/BasicAppletContainer.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/ConfigOverlayWithHandles.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/PlaceHolder.qml
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/libcontainmentlayoutmanagerplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/libcontainmentlayoutmanagerplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/libdigitalclockplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/libdigitalclockplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/kicker
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/kicker/libkickerplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/kicker/libkickerplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/kicker/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/mpris
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris/kmpris.qmltypes
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/mpris/libkmprisplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/mpris/libkmprisplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/sessions
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/sessions/libsessionsprivateplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/sessions/libsessionsprivateplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/sessions/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/shell
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/shell/libplasmashellprivateplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/shell/libplasmashellprivateplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/shell/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/wallpapers
 %dir %{_libdir}/qt6/qml/org/kde/plasma/wallpapers/image
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/wallpapers/image/libplasma_wallpaper_imageplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/wallpapers/image/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/wallpapers/image/libplasma_wallpaper_image.so
+%{_libdir}/qt6/qml/org/kde/plasma/wallpapers/image/plasma_wallpaper_image.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/wallpapers/image/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar
@@ -416,7 +411,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/InfiniteList.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/MonthView.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/MonthViewHeader.qml
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/libcalendarplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/libcalendarplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/components
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/BadgeOverlay.qml
@@ -427,13 +422,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/SystemDialog.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/libkeyboardlayoutplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/keyboardlayoutplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/libkeyboardlayoutplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/libtrianglemousefilterplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/libtrianglemousefilterplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/taskmanager
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/taskmanager/libtaskmanagerplugin.so
+%{_libdir}/qt6/qml/org/kde/taskmanager/libtaskmanagerplugin.so
 %{_libdir}/qt6/qml/org/kde/taskmanager/qmldir
 %attr(755,root,root) %{_prefix}/libexec/baloorunner
 %attr(755,root,root) %{_prefix}/libexec/kf6/kauth/fontinst
@@ -445,60 +442,55 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_prefix}/libexec/plasma-dbus-run-session-if-needed
 %attr(755,root,root) %{_prefix}/libexec/plasma-sourceenv.sh
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-custom-position-of-panels
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/krunner/krunner_appstream.so
+%{_libdir}/qt6/plugins/kf6/krunner/krunner_appstream.so
 %ghost %{_libdir}/libbatterycontrol.so.6
-%attr(755,root,root) %{_libdir}/libbatterycontrol.so.*.*
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_nightlight.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasmacalendarplugins/holidaysevents.so
+%{_libdir}/libbatterycontrol.so.*.*
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_nightlight.so
+%{_libdir}/qt6/plugins/plasmacalendarplugins/holidaysevents.so
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/battery
 %{_libdir}/qt6/qml/org/kde/plasma/private/battery/batterycontrol.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/private/battery/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/battery/libbatterycontrolplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/battery/libbatterycontrolplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/battery/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/BasicResizeHandle.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/containmentlayoutmanagerplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/private/containmentlayoutmanager/kde-qmlmodule.version
-%dir %{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier
-%{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/devicenotifierplugin.qmltypes
-%{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/libdevicenotifierplugin.so
-%{_libdir}/qt6/qml/org/kde/plasma/private/devicenotifier/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/digitalclockplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/private/digitalclock/kde-qmlmodule.version
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents
 %{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/holidayevents.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/libholidayevents.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/libholidayevents.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/holidayevents/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/kde-qmlmodule.version
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator
 %{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/keyboardindicatorplugin.qmltypes
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/libkeyboardindicatorplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/libkeyboardindicatorplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/keyboardindicator/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/sessions/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/sessions/sessionsprivateplugin.qmltypes
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/systemtray
 %{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/libsystemtrayplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/libsystemtrayplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/systemtray/systemtrayplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/calendarplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/calendar/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/libworkspacecomponents.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/components/libworkspacecomponents.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/workspacecomponents.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/dbusplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/kde-qmlmodule.version
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/libdbusplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/libdbusplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dbus/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/trianglemousefilter/trianglemousefilterplugin.qmltypes
 %attr(755,root,root) %{_prefix}/libexec/plasma-fallback-session-restore
 %attr(755,root,root) %{_prefix}/libexec/plasma-fallback-session-save
 %ghost %{_libdir}/libklipper.so.6
-%attr(755,root,root) %{_libdir}/libklipper.so.*.*
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/donationmessage.so
+%{_libdir}/libklipper.so.*.*
+%{_libdir}/qt6/plugins/kf6/kded/donationmessage.so
 %dir %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard
 %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/BarcodePage.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/ClipboardItemDelegate.qml
@@ -511,37 +503,37 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/UrlItemDelegate.qml
 %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/klipperplugin.qmltypes
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/libklipperplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/libklipperplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/private/shell/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/shell/plasmashellprivateplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/taskmanager/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/taskmanager/taskmanager.qmltypes
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.3-update-clipboard-database-2-to-3
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/geotimezoned.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kded/oom-notifier.so
+%{_libdir}/qt6/plugins/kf6/kded/geotimezoned.so
+%{_libdir}/qt6/plugins/kf6/kded/oom-notifier.so
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.4-migrate-fullscreen-notifications-to-dnd
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.mediacontroller.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_componentchooser.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.mediacontroller.so
+%{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_componentchooser.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/appmenuplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/private/appmenu/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/kicker/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/kicker/kickerplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/libsystemdialogs.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/libsystemdialogs.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/systemdialogs.qmltypes
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/Osd.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/OsdItem.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/libplasmashell_osd.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/libplasmashell_osd.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/plasmashell_osd.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/GeoJsonDelegate.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/TimezoneSelector.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/kde-qmlmodule.version
-%attr(755,root,root) %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/libtimezoneplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/libtimezoneplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/qmldir
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/timezoneselector/timezoneplugin.qmltypes
 
@@ -705,11 +697,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.plasma.calendar.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.cameraindicator.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.clipboard.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.devicenotifier.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.digitalclock.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.lock_logout.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.manage-inputmethod.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.notifications.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.systemmonitor.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.systemmonitor.cpu.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.systemmonitor.cpucore.appdata.xml
@@ -808,29 +796,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/config
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/config/main.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/metadata.json
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/config
-%{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/config/main.xml
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/DeviceItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/FullRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier/metadata.json
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/config
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/config/config.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/config/main.xml
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/CalendarView.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/DigitalClock.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/Tooltip.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/configAppearance.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/configCalendar.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/configTimeZones.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/metadata.json
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.icon
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.icon/contents
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.icon/contents/config
@@ -838,41 +803,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.icon/contents/ui
 %{_datadir}/plasma/plasmoids/org.kde.plasma.icon/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.icon/metadata.json
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/config
-%{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/config/config.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/config/main.xml
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/ui/ConfigGeneral.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/ui/data.js
-%{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.lock_logout/metadata.json
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.manage-inputmethod
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.manage-inputmethod/contents
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.manage-inputmethod/contents/ui
 %{_datadir}/plasma/plasmoids/org.kde.plasma.manage-inputmethod/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.manage-inputmethod/metadata.json
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/CompactRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/DraggableDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/FullRepresentation.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/NotificationPopup.qml
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/Globals.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/PulseAudio.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/qmldir
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/metadata.json
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer/contents
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer/contents/config
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer/contents/ui
-%{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer/contents/config/main.xml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer/contents/ui/main.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.panelspacer/metadata.json
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemmonitor.cpu
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemmonitor.cpu/contents
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemmonitor.cpu/contents/config
@@ -946,6 +881,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/wallpapers/org.kde.image/contents/ui/mediacomponent/BaseMediaComponent.qml
 %{_datadir}/plasma/wallpapers/org.kde.image/contents/ui/mediacomponent/BlurComponent.qml
 %{_datadir}/plasma/wallpapers/org.kde.image/contents/ui/mediacomponent/StaticImageComponent.qml
+%{_datadir}/plasma/wallpapers/org.kde.image/contents/ui/mediacomponent/DayNightComponent.qml
+%{_datadir}/plasma/wallpapers/org.kde.image/contents/ui/mediacomponent/DayNightImage.qml
+%{_datadir}/plasma/wallpapers/org.kde.image/contents/ui/mediacomponent/DayNightView.qml
 %{_datadir}/plasma/wallpapers/org.kde.image/metadata.json
 %dir %{_datadir}/plasma/wallpapers/org.kde.slideshow
 %dir %{_datadir}/plasma/wallpapers/org.kde.slideshow/contents
@@ -964,6 +902,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/BaseMediaComponent.qml
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/BlurComponent.qml
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/StaticImageComponent.qml
+%{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/DayNightComponent.qml
+%{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/DayNightImage.qml
+%{_datadir}/plasma/wallpapers/org.kde.slideshow/contents/ui/mediacomponent/DayNightView.qml
 %{_datadir}/plasma/wallpapers/org.kde.slideshow/metadata.json
 %{_datadir}/plasma5support/services/applicationjobs.operations
 %{_datadir}/plasma5support/services/notifications.operations
@@ -982,16 +923,12 @@ rm -rf $RPM_BUILD_ROOT
 %{zsh_compdir}/_krunner
 %{zsh_compdir}/_plasmashell
 %{_datadir}/kconf_update/plasmashell-6.0-keep-custom-position-of-panels.upd
-%dir %{_datadir}/plasma/weather
-%{_datadir}/plasma/weather/noaa_station_list.xml
 %{_datadir}/qlogging-categories6/batterycontrol.categories
 %{_desktopdir}/kcm_nightlight.desktop
 %{_desktopdir}/org.kde.kfontinst.desktop
 %{_desktopdir}/org.kde.plasma-fallback-session-save.desktop
-%{_datadir}/metainfo/org.kde.plasma.panelspacer.appdata.xml
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard/contents/ui/main.qml
-%{_datadir}/qlogging-categories6/devicenotifier.categories
 %{_datadir}/xdg-desktop-portal/kde-portals.conf
 %{_datadir}/knotifications6/donationmessage.notifyrc
 %{_desktopdir}/org.kde.klipper.desktop
@@ -1000,29 +937,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kconf_update/plasma6.4-migrate-fullscreen-notifications-to-dnd.upd
 %{_datadir}/knotifications6/libnotificationmanager.notifyrc
 %{_datadir}/knotifications6/oom-notifier.notifyrc
-%{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/NoTimezoneWarning.qml
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/ActionContainer.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/Body.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/DraggableFileArea.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/EditContextMenu.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/FooterLoader.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/HeadingButtons.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/Icon.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/JobDetails.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/JobIconItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/JobItem.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/ModelInterface.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/NotificationHeader.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/NotificationReplyField.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/Summary.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/ThumbnailStrip.qml
-%dir %{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/BaseDelegate.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/DelegateHistory.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/DelegateHistoryGrouped.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/delegates/DelegatePopup.qml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/components/SpeedChart.qml
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/applet
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/applet/CompactApplet.qml
 %dir %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/config
@@ -1043,23 +957,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/ui/items/PulseAnimation.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemtray/contents/ui/items/StatusNotifierItem.qml
 %{_datadir}/timezonefiles
+%{_desktopdir}/kcm_nighttime.desktop
+%{_desktopdir}/org.kde.plasma-interactiveconsole.desktop
+%{_datadir}/kconf_update/plasmashell-6.5-remove-stop-activity-shortcut.upd
 
 %files devel
 %defattr(644,root,root,755)
+%{_includedir}/klookandfeel
 %{_includedir}/krdb
 %{_includedir}/kworkspace6
-%{_includedir}/plasma5support
 %{_includedir}/taskmanager
 %{_libdir}/cmake/KRunnerAppDBusInterface
 %{_libdir}/cmake/KSMServerDBusInterface
 %{_libdir}/cmake/LibKWorkspace
 %{_libdir}/cmake/LibTaskManager
 %{_libdir}/libtaskmanager.so
-%{_libdir}/libweather_ion.so
-%{_includedir}/colorcorrect
-%{_libdir}/cmake/LibColorCorrect
-%{_libdir}/libcolorcorrect.so
 %{_includedir}/notificationmanager
+%{_libdir}/cmake/Krdb
+%{_libdir}/cmake/LibKLookAndFeel
 %{_libdir}/cmake/LibNotificationManager
 %{_libdir}/libkfontinst.so
 %{_libdir}/libkfontinstui.so
@@ -1068,3 +983,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libkworkspace6.so
 %{_libdir}/libbatterycontrol.so
 %{_libdir}/libklipper.so
+%{_libdir}/libklookandfeel.so
