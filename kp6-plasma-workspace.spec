@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.5.1
+%define		kdeplasmaver	6.5.2
 %define		qtver		6.6.0
 %define		kf6ver		6.2.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.5.1
+Version:	6.5.2
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	284312307f68bdfadb7542d4932dd6ae
+# Source0-md5:	a488661f1feaf83e86dbdcb964d1b827
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -683,9 +683,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kstyle/themes/qtmotif.themerc
 %{_datadir}/kstyle/themes/qtplastique.themerc
 %{_datadir}/kstyle/themes/qtwindows.themerc
-%dir %{_datadir}/kxmlgui5/kfontview
-%{_datadir}/kxmlgui5/kfontview/kfontviewpart.rc
-%{_datadir}/kxmlgui5/kfontview/kfontviewui.rc
+%{_datadir}/kxmlgui5/kfontview
+%{_datadir}/kxmlgui5/kfontviewpart
 %{_datadir}/metainfo/org.kde.breeze.desktop.appdata.xml
 %{_datadir}/metainfo/org.kde.breezedark.desktop.appdata.xml
 %{_datadir}/metainfo/org.kde.breezetwilight.desktop.appdata.xml
