@@ -5,8 +5,8 @@
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
 %define		kdeplasmaver	6.5.5
-%define		qtver		6.6.0
-%define		kf6ver		6.2.0
+%define		qtver		6.9.0
+%define		kf6ver		6.18.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
@@ -23,6 +23,7 @@ BuildRequires:	AppStream-qt6-devel >= 1.0
 BuildRequires:	PackageKit-qt6-devel
 BuildRequires:	Qt6Concurrent-devel >= %{qtver}
 BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt6DBus-devel >= %{qtver}
 BuildRequires:	Qt6Location-devel >= %{qtver}
 BuildRequires:	Qt6Network-devel >= %{qtver}
 BuildRequires:	Qt6Positioning-devel >= %{qtver}
@@ -32,12 +33,13 @@ BuildRequires:	Qt6Quick-devel >= %{qtver}
 BuildRequires:	Qt6ShaderTools-devel >= %{qtver}
 BuildRequires:	Qt6Sql-devel >= %{qtver}
 BuildRequires:	Qt6Svg-devel >= %{qtver}
-BuildRequires:	Qt6Test-devel >= %{qtver}
+%{?with_tests:BuildRequires:	Qt6Test-devel >= %{qtver}}
 BuildRequires:	Qt6WaylandClient-devel >= %{qtver}
+%{?with_tests:BuildRequires:	Qt6WaylandCompositor-devel >= %{qtver}}
 BuildRequires:	Qt6Widgets-devel >= %{qtver}
 BuildRequires:	cmake >= 3.22
+BuildRequires:	dbus-devel
 BuildRequires:	fontconfig-devel
-BuildRequires:	gpsd-devel
 BuildRequires:	iso-codes
 BuildRequires:	ka6-kio-extras-devel >= 25.08.2-3
 BuildRequires:	ka6-libkexiv2-devel
@@ -45,12 +47,17 @@ BuildRequires:	kf6-baloo-devel
 BuildRequires:	kf6-extra-cmake-modules >= %{kf6ver}
 BuildRequires:	kf6-karchive-devel >= %{kf6ver}
 BuildRequires:	kf6-kauth-devel >= %{kf6ver}
+BuildRequires:	kf6-kbookmarks-devel >= %{kf6ver}
 BuildRequires:	kf6-kcmutils-devel >= %{kf6ver}
+BuildRequires:	kf6-kcolorscheme-devel >= %{kf6ver}
+BuildRequires:	kf6-kcompletion-devel >= %{kf6ver}
+BuildRequires:	kf6-kconfig-devel >= %{kf6ver}
+BuildRequires:	kf6-kconfigwidgets-devel >= %{kf6ver}
 BuildRequires:	kf6-kcoreaddons-devel >= %{kf6ver}
 BuildRequires:	kf6-kcrash-devel >= %{kf6ver}
 BuildRequires:	kf6-kdbusaddons-devel >= %{kf6ver}
 BuildRequires:	kf6-kdeclarative-devel >= %{kf6ver}
-BuildRequires:	kf6-kded-devel
+BuildRequires:	kf6-kded-devel >= %{kf6ver}
 BuildRequires:	kf6-kdoctools-devel >= %{kf6ver}
 BuildRequires:	kf6-kglobalaccel-devel >= %{kf6ver}
 BuildRequires:	kf6-kguiaddons-devel >= %{kf6ver}
@@ -59,30 +66,36 @@ BuildRequires:	kf6-ki18n-devel >= %{kf6ver}
 BuildRequires:	kf6-kiconthemes-devel >= %{kf6ver}
 BuildRequires:	kf6-kidletime-devel >= %{kf6ver}
 BuildRequires:	kf6-kio-devel >= %{kf6ver}
-BuildRequires:	kf6-kirigami-addons-devel
+BuildRequires:	kf6-kirigami-addons-devel >= 0.10.0
 BuildRequires:	kf6-kirigami-devel >= %{kf6ver}
 BuildRequires:	kf6-kitemmodels-devel >= %{kf6ver}
+BuildRequires:	kf6-kjobwidgets-devel >= %{kf6ver}
 BuildRequires:	kf6-knewstuff-devel >= %{kf6ver}
 BuildRequires:	kf6-knotifications-devel >= %{kf6ver}
 BuildRequires:	kf6-knotifyconfig-devel >= %{kf6ver}
 BuildRequires:	kf6-kpackage-devel >= %{kf6ver}
-BuildRequires:	kf6-kpeople-devel >= %{kf6ver}
+BuildRequires:	kf6-kparts-devel >= %{kf6ver}
 BuildRequires:	kf6-kquickcharts-devel >= %{kf6ver}
 BuildRequires:	kf6-krunner-devel >= %{kf6ver}
+BuildRequires:	kf6-kservice-devel >= %{kf6ver}
 BuildRequires:	kf6-kstatusnotifieritem-devel >= %{kf6ver}
 BuildRequires:	kf6-ksvg-devel >= %{kf6ver}
 BuildRequires:	kf6-ktexteditor-devel >= %{kf6ver}
 BuildRequires:	kf6-ktextwidgets-devel >= %{kf6ver}
-BuildRequires:	kf6-kunitconversion-devel >= %{kf6ver}
 BuildRequires:	kf6-kuserfeedback-devel >= %{kf6ver}
 BuildRequires:	kf6-kwallet-devel >= %{kf6ver}
+BuildRequires:	kf6-kwidgetsaddons-devel >= %{kf6ver}
+BuildRequires:	kf6-kwindowsystem-devel >= %{kf6ver}
+BuildRequires:	kf6-kxmlgui-devel >= %{kf6ver}
 BuildRequires:	kf6-networkmanager-qt-devel >= %{kf6ver}
+BuildRequires:	kf6-prison
 BuildRequires:	kf6-prison-devel >= %{kf6ver}
+BuildRequires:	kf6-solid-devel >= %{kf6ver}
 BuildRequires:	kp6-breeze-devel >= %{kdeplasmaver}
-BuildRequires:	kp6-kpipewire-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-knighttime-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-kscreenlocker-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-kwayland-devel >= %{kdeplasmaver}
-BuildRequires:	kp6-kwin-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-kwin-devel
 BuildRequires:	kp6-layer-shell-qt-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libkscreen-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libksysguard-devel >= %{kdeplasmaver}
@@ -90,12 +103,12 @@ BuildRequires:	kp6-libplasma-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma-activities-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma-activities-stats-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma5support-devel >= %{kdeplasmaver}
-BuildRequires:	kuserfeedback-devel
-BuildRequires:	libdrm-devel
+BuildRequires:	libcanberra-devel
 BuildRequires:	libicu-devel
 BuildRequires:	libqalculate-devel > 2.0
-BuildRequires:	libstdc++-devel >= 6:5
+BuildRequires:	libstdc++-devel >= 6:11
 BuildRequires:	libxcb-devel
+BuildRequires:	libxcrypt-devel >= 4
 BuildRequires:	ninja
 BuildRequires:	phonon-qt6-devel >= 4.6.60
 BuildRequires:	pipewire-devel >= 0.3
@@ -106,10 +119,14 @@ BuildRequires:	qcoro-qt6-devel
 BuildRequires:	qt6-shadertools
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	udev-devel
 BuildRequires:	wayland-devel
-BuildRequires:	wayland-protocols >= 1.31
+%{?with_tests:BuildRequires:	wayland-protocols >= 1.24}
 BuildRequires:	xcb-util-cursor-devel
+BuildRequires:	xcb-util-devel
+BuildRequires:	xcb-util-image-devel
 BuildRequires:	xorg-lib-libICE-devel
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
