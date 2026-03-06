@@ -12,7 +12,7 @@
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
 Version:	6.6.2
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -800,6 +800,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemmonitor/contents/ui/config/FaceDetails.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemmonitor/contents/ui/main.qml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.systemmonitor/metadata.json
+%dir %{_datadir}/plasma/wallpapers
 %dir %{_datadir}/plasma/wallpapers/org.kde.color
 %dir %{_datadir}/plasma/wallpapers/org.kde.color/contents
 %dir %{_datadir}/plasma/wallpapers/org.kde.color/contents/config
