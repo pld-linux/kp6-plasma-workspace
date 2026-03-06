@@ -12,7 +12,7 @@
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
 Version:	6.6.2
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -689,6 +689,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/knsrcfiles/wallpaper.knsrc
 %{_datadir}/knsrcfiles/wallpaperplugin.knsrc
 %{_datadir}/knsrcfiles/xcursor.knsrc
+%dir %{_datadir}/konqsidebartng/virtual_folders
+%dir %{_datadir}/konqsidebartng/virtual_folders/services
 %{_datadir}/konqsidebartng/virtual_folders/services/fonts.desktop
 %{_datadir}/krunner/dbusplugins/plasma-runner-baloosearch.desktop
 %{_datadir}/kstyle/themes/qtcde.themerc
