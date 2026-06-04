@@ -149,6 +149,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 KDE Plasma Workspace.
 
+%description -l pl.UTF-8
+Obszary robocze Plazmy.
+
 %package data
 Summary:	Data files for %{kpname}
 Summary(pl.UTF-8):	Dane dla %{kpname}
