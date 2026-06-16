@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.6.5
+%define		kdeplasmaver	6.7.0
 %define		qtver		6.9.0
 %define		kf6ver		6.18.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.6.5
+Version:	6.7.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	5b0b456056d6f7db63523de7b9841ef7
+# Source0-md5:	09e2b5fc88e251f3efcbcbc8e56d8461
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -263,6 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %{systemduserunitdir}/plasma-ksplash.service
 %{systemduserunitdir}/plasma-plasmashell.service
 %{systemduserunitdir}/plasma-restoresession.service
+%{systemduserunitdir}/plasma-startupsound.service
 %{systemduserunitdir}/plasma-workspace-wayland.target
 %{systemduserunitdir}/plasma-workspace-x11.target
 %{systemduserunitdir}/plasma-workspace.target
@@ -292,8 +293,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/plugins/kf6/kded/ktimezoned.so
 %{_libdir}/qt6/plugins/kf6/kded/lookandfeelautoswitcher.so
 %{_libdir}/qt6/plugins/kf6/kded/mprisservice.so
-%{_libdir}/qt6/plugins/kf6/kded/plasma-session-shortcuts.so
+%{_libdir}/qt6/plugins/kf6/kded/oom_notifier.so
 %{_libdir}/qt6/plugins/kf6/kded/plasma_accentcolor_service.so
+%{_libdir}/qt6/plugins/kf6/kded/plasma_session_shortcuts.so
 %{_libdir}/qt6/plugins/kf6/kded/soliduiserver.so
 %{_libdir}/qt6/plugins/kf6/kded/statusnotifierwatcher.so
 %{_libdir}/qt6/plugins/kf6/kfileitemaction/wallpaperfileitemaction.so
@@ -427,9 +429,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/BatteryIcon.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/KeyboardLayoutSwitcher.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/components/qmldir
-%dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs
-%{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/SystemDialog.qml
-%{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/qmldir
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/keyboardlayout/keyboardlayoutplugin.qmltypes
@@ -520,15 +519,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/taskmanager/taskmanager.qmltypes
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.3-update-clipboard-database-2-to-3
 %{_libdir}/qt6/plugins/kf6/kded/geotimezoned.so
-%{_libdir}/qt6/plugins/kf6/kded/oom-notifier.so
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.4-migrate-fullscreen-notifications-to-dnd
 %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.mediacontroller.so
 %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_componentchooser.so
 %{_libdir}/qt6/qml/org/kde/plasma/private/kicker/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/private/kicker/kickerplugin.qmltypes
-%{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/kde-qmlmodule.version
-%{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/libsystemdialogs.so
-%{_libdir}/qt6/qml/org/kde/plasma/workspace/dialogs/systemdialogs.qmltypes
 %dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/Osd.qml
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/osd/OsdItem.qml
@@ -548,12 +543,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.cameraindicator.so
 %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.clipboard.so
 %{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.manage-inputmethod.so
+%{_libdir}/qt6/plugins/plasma/applets/org.kde.plasma.marginsseparator.so
 %dir %{_libdir}/qt6/qml/org/kde/plasma/clock
 %{_libdir}/qt6/qml/org/kde/plasma/clock/clockplugin.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/clock/kde-qmlmodule.version
 %{_libdir}/qt6/qml/org/kde/plasma/clock/libclockplugin.so
 %{_libdir}/qt6/qml/org/kde/plasma/clock/qmldir
 %attr(755,root,root) %{_prefix}/libexec/ksecretprompter
+%attr(755,root,root) %{_prefix}/libexec/plasma-startup-sound
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
@@ -738,8 +735,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/splash/images/busywidget.svgz
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/splash/images/kde.svgz
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/splash/images/plasma.svgz
-%dir %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/systemdialog
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/systemdialog/SystemDialog.qml
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/metadata.json
 %dir %{_datadir}/plasma/look-and-feel/org.kde.breezedark.desktop
 %dir %{_datadir}/plasma/look-and-feel/org.kde.breezedark.desktop/contents
@@ -877,7 +872,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kconf_update/plasma6.3-update-clipboard-database-2-to-3.upd
 %{_datadir}/kconf_update/plasma6.4-migrate-fullscreen-notifications-to-dnd.upd
 %{_datadir}/knotifications6/libnotificationmanager.notifyrc
-%{_datadir}/knotifications6/oom-notifier.notifyrc
+%{_datadir}/knotifications6/oom_notifier.notifyrc
 %{_datadir}/timezonefiles
 %{_desktopdir}/kcm_nighttime.desktop
 %{_desktopdir}/org.kde.plasma-interactiveconsole.desktop
@@ -885,6 +880,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/org.kde.baloorunner.desktop
 %{_desktopdir}/org.kde.secretprompter.desktop
 %{_datadir}/dbus-1/services/org.kde.secretprompter.service
+%{_datadir}/xdg-desktop-portal/portals/plasmanotify.portal
 
 
 %files devel
