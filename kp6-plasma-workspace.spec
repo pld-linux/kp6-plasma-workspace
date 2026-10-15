@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.7.5
+%define		kdeplasmaver	6.8.0
 %define		qtver		6.9.0
 %define		kf6ver		6.18.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.7.5
+Version:	6.8.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	857feaf089b418bf64903f67c88486e4
+# Source0-md5:	1bc81503a1cf7f92be535eb966b15dd4
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -103,6 +103,7 @@ BuildRequires:	kp6-libplasma-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma-activities-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma-activities-stats-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma5support-devel >= %{kdeplasmaver}
+BuildRequires:	kp6-union-devel >= %{kdeplasmaver}
 BuildRequires:	libcanberra-devel
 BuildRequires:	libicu-devel
 BuildRequires:	libqalculate-devel > 2.0
@@ -228,8 +229,6 @@ rm -rf $RPM_BUILD_ROOT
 /etc/xdg/menus/plasma-applications.menu
 /etc/xdg/plasmanotifyrc
 %attr(755,root,root) %{_bindir}/gmenudbusmenuproxy
-%attr(755,root,root) %{_bindir}/kcminit
-%attr(755,root,root) %{_bindir}/kcminit_startup
 %attr(755,root,root) %{_bindir}/kcolorschemeeditor
 %attr(755,root,root) %{_bindir}/kde-systemd-start-condition
 %attr(755,root,root) %{_bindir}/kfontinst
@@ -251,13 +250,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/plasmashell
 %attr(755,root,root) %{_bindir}/plasmawindowed
 %attr(755,root,root) %{_bindir}/startplasma-wayland
-%attr(755,root,root) %{_bindir}/startplasma-x11
 %attr(755,root,root) %{_bindir}/xembedsniproxy
 %{systemduserunitdir}/plasma-baloorunner.service
 %{systemduserunitdir}/plasma-core.target
 %{systemduserunitdir}/plasma-gmenudbusmenuproxy.service
-%{systemduserunitdir}/plasma-kcminit-phase1.service
-%{systemduserunitdir}/plasma-kcminit.service
 %{systemduserunitdir}/plasma-krunner.service
 %{systemduserunitdir}/plasma-ksmserver.service
 %{systemduserunitdir}/plasma-ksplash.service
@@ -265,7 +261,6 @@ rm -rf $RPM_BUILD_ROOT
 %{systemduserunitdir}/plasma-restoresession.service
 %{systemduserunitdir}/plasma-startupsound.service
 %{systemduserunitdir}/plasma-workspace-wayland.target
-%{systemduserunitdir}/plasma-workspace-x11.target
 %{systemduserunitdir}/plasma-workspace.target
 %{systemduserunitdir}/plasma-xembedsniproxy.service
 %attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.0-remove-dpi-settings
@@ -338,8 +333,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/plugins/plasma/containmentactions/org.kde.switchdesktop.so
 %{_libdir}/qt6/plugins/plasma/containmentactions/switchactivity.so
 %{_libdir}/qt6/plugins/plasma/containmentactions/switchwindow.so
-%{_libdir}/qt6/plugins/plasma/kcminit/kcm_fonts_init.so
-%{_libdir}/qt6/plugins/plasma/kcminit/kcm_style_init.so
 %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_autostart.so
 %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_colors.so
 %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_cursortheme.so
@@ -367,9 +360,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/breeze/components/SessionManagementScreen.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/UserDelegate.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/UserList.qml
-%{_libdir}/qt6/qml/org/kde/breeze/components/VirtualKeyboard.qml
-%{_libdir}/qt6/qml/org/kde/breeze/components/VirtualKeyboardLoader.qml
-%{_libdir}/qt6/qml/org/kde/breeze/components/VirtualKeyboard_wayland.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/WallpaperFader.qml
 %{_libdir}/qt6/qml/org/kde/breeze/components/components.qmltypes
 %{_libdir}/qt6/qml/org/kde/breeze/components/kde-qmlmodule.version
@@ -551,6 +541,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/clock/qmldir
 %attr(755,root,root) %{_prefix}/libexec/ksecretprompter
 %attr(755,root,root) %{_prefix}/libexec/plasma-startup-sound
+%attr(755,root,root) %{_libdir}/kconf_update_bin/plasma6.8-remove-action-menu-shortcut
+%dir %{_libdir}/qt6/qml/org/kde/plasma/private/accessibility
+%{_libdir}/qt6/qml/org/kde/plasma/private/accessibility/accessibilityprivateplugin.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/private/accessibility/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/private/accessibility/libaccessibilityprivateplugin.so
+%{_libdir}/qt6/qml/org/kde/plasma/private/accessibility/qmldir
+%{_libdir}/qt6/qml/org/kde/plasma/private/clipboard/HoverBlocker.qml
+%dir %{_libdir}/qt6/qml/org/kde/plasma/shell
+%{_libdir}/qt6/qml/org/kde/plasma/shell/plasmashell.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/shell/qmldir
+%dir %{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/Footer.qml
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/libloginlockscreen.so
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/loginlockscreen.qmltypes
+%{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/qmldir
+%attr(755,root,root) %{_prefix}/libexec/plasma-setup-xwayland
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
@@ -720,10 +727,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/defaults
 %dir %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/layouts
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/layouts/org.kde.plasma.desktop-layout.js
-%dir %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout/Logout.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout/LogoutButton.qml
-%{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/logout/timer.js
 %dir %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/fullscreenpreview.jpg
 %{_datadir}/plasma/look-and-feel/org.kde.breeze.desktop/contents/previews/lockscreen.png
@@ -857,7 +860,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qlogging-categories6/plasma-workspace.categories
 %{_datadir}/solid/actions/openWithFileManager.desktop
 %{_datadir}/wayland-sessions/plasma.desktop
-%{_datadir}/xsessions/plasmax11.desktop
 %{zsh_compdir}/_krunner
 %{zsh_compdir}/_plasmashell
 %{_datadir}/kconf_update/plasmashell-6.0-keep-custom-position-of-panels.upd
@@ -881,12 +883,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/org.kde.secretprompter.desktop
 %{_datadir}/dbus-1/services/org.kde.secretprompter.service
 %{_datadir}/xdg-desktop-portal/portals/plasmanotify.portal
+%{_datadir}/config.kcfg/desktopthemesettings.kcfg
+%{_datadir}/config.kcfg/klipper.kcfg
+%{_datadir}/config.kcfg/nighttimesettings.kcfg
+%{_datadir}/config.kcfg/notifications_badgesettings.kcfg
+%{_datadir}/config.kcfg/notifications_behaviorsettings.kcfg
+%{_datadir}/config.kcfg/notifications_donotdisturbsettings.kcfg
+%{_datadir}/config.kcfg/notifications_eventsettings.kcfg
+%{_datadir}/config.kcfg/notifications_jobsettings.kcfg
+%{_datadir}/config.kcfg/notificationsettings.kcfg
+%{_datadir}/config.kcfg/regionandlangsettingsbase.kcfg
+%{_datadir}/config.kcfg/smserversettings.kcfg
+%{_datadir}/config.kcfg/soundthemesettings.kcfg
+%{_datadir}/config.kcfg/terminal_settings.kcfg
+%{_datadir}/kconf_update/plasma6.8-remove-action-menu-shortcut.upd
 
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/klookandfeel
-%{_includedir}/krdb
 %{_includedir}/kworkspace6
 %{_includedir}/taskmanager
 %{_libdir}/cmake/KRunnerAppDBusInterface
@@ -895,13 +910,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/LibTaskManager
 %{_libdir}/libtaskmanager.so
 %{_includedir}/notificationmanager
-%{_libdir}/cmake/Krdb
 %{_libdir}/cmake/LibKLookAndFeel
 %{_libdir}/cmake/LibNotificationManager
 %{_libdir}/libkfontinst.so
 %{_libdir}/libkfontinstui.so
 %{_libdir}/libnotificationmanager.so
-%{_libdir}/libkrdb.so
 %{_libdir}/libkworkspace6.so
 %{_libdir}/libbatterycontrol.so
 %{_libdir}/libklipper.so
