@@ -4,19 +4,19 @@
 # TODO:
 #  * dbusmenu-qt5 , Support for notification area menus via the DBusMenu protocol , <https://launchpad.net/libdbusmenu-qt>
 #
-%define		kdeplasmaver	6.8.2
+%define		kdeplasmaver	6.8.3
 %define		qtver		6.9.0
 %define		kf6ver		6.18.0
 %define		kpname		plasma-workspace
 
 Summary:	KDE Plasma Workspace
 Name:		kp6-%{kpname}
-Version:	6.8.2
+Version:	6.8.3
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	0bbc8059d5fc5dc11e7112043694cbe2
+# Source0-md5:	98814a46a64363ec437378e774b6e5ea
 Source1:	kde.pam
 URL:		http://www.kde.org/
 BuildRequires:	AppStream-qt6-devel >= 1.0
@@ -558,6 +558,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/loginlockscreen.qmltypes
 %{_libdir}/qt6/qml/org/kde/plasma/workspace/loginlockscreen/qmldir
 %attr(755,root,root) %{_prefix}/libexec/plasma-setup-xwayland
+%dir %{_libdir}/qt6/qml/org/kde/kworkspace
+%{_libdir}/qt6/qml/org/kde/kworkspace/kde-qmlmodule.version
+%{_libdir}/qt6/qml/org/kde/kworkspace/kworkspace.qmltypes
+%{_libdir}/qt6/qml/org/kde/kworkspace/libkworkspaceplugin.so
+%{_libdir}/qt6/qml/org/kde/kworkspace/qmldir
 
 %files data -f %{kpname}.lang
 %defattr(644,root,root,755)
